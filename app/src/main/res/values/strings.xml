@@ -8,4 +8,11 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="tutorial">Tutorial</string>
+    <string name="submit">Submit</string>
+    <string name="stepOne">1. Go to steamidfinder.com/lookup</string>
+    <string name="stepTwo">2. Type your Steam username in the box</string>
+    <string name="stepThree">3. Click the Get SteamId button</string>
+    <string name="stepFour">4. Find the 17 digit number next to "steamID64:"</string>
+    <string name="stepFive">5. Copy the 17 digit number</string>
+    <string name="stepSix">6. Return to the first page and paste the number in the box</string>
 </resources>

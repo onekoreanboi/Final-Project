@@ -5,11 +5,18 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/navigation"
         tools:ignore="UnusedNavigation" app:startDestination="@id/fragmentWelcomePage">
-    <fragment android:id="@+id/fragmentWelcomePage" android:name="com.example.finalproject.FragmentWelcomePage"
+    <fragment android:id="@+id/fragmentWelcomePage" android:name="com.example.finalproject.fragments.FragmentWelcomePage"
               android:label="FragmentWelcomePage">
         <action android:id="@+id/action_fragmentWelcomePage_to_fragmentTutorialPage"
                 app:destination="@id/fragmentTutorialPage"/>
+        <action android:id="@+id/action_fragmentWelcomePage_to_fragmentStatsPage"
+                app:destination="@id/fragmentStatsPage"/>
     </fragment>
-    <fragment android:id="@+id/fragmentTutorialPage" android:name="com.example.finalproject.FragmentTutorialPage"
-              android:label="FragmentTutorialPage"/>
+    <fragment android:id="@+id/fragmentTutorialPage" android:name="com.example.finalproject.fragments.FragmentTutorialPage"
+              android:label="FragmentTutorialPage">
+        <action android:id="@+id/action_fragmentTutorialPage_to_fragmentStatsPage"
+                app:destination="@id/fragmentStatsPage"/>
+    </fragment>
+    <fragment android:id="@+id/fragmentStatsPage" android:name="com.example.finalproject.fragments.FragmentStatsPage"
+              android:label="FragmentStatsPage"/>
 </navigation>
