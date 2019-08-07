@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/navigation"
+        tools:ignore="UnusedNavigation" app:startDestination="@id/fragmentWelcomePage">
+    <fragment android:id="@+id/fragmentWelcomePage" android:name="com.example.finalproject.FragmentWelcomePage"
+              android:label="FragmentWelcomePage">
+        <action android:id="@+id/action_fragmentWelcomePage_to_fragmentTutorialPage"
+                app:destination="@id/fragmentTutorialPage"/>
+    </fragment>
+    <fragment android:id="@+id/fragmentTutorialPage" android:name="com.example.finalproject.FragmentTutorialPage"
+              android:label="FragmentTutorialPage"/>
+</navigation>
