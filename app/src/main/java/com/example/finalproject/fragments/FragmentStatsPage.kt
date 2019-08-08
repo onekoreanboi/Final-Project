@@ -28,5 +28,4 @@ class FragmentStatsPage : Fragment() {
         return inflater.inflate(R.layout.fragment_stats_page, container, false)
     }
 
-
 }

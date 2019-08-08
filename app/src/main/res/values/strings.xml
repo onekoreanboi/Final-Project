@@ -15,4 +15,5 @@
     <string name="stepFour">4. Find the 17 digit number next to "steamID64:"</string>
     <string name="stepFive">5. Copy the 17 digit number</string>
     <string name="stepSix">6. Return to the first page and paste the number in the box</string>
+    <string name="your_stats">Your Stats:</string>
 </resources>
