@@ -12,9 +12,9 @@ interface Endpoints{
     fun getStatsList(): Call<List<Player>>
 
     @GET("v2/csgo/standard/profile/steam/{steamId}")
-    fun getStatsById(@Path("playerStats") playerStats: Int): Call<Player>
+    fun getSteamId(@Path("steamId") steamIdInput: Int): Call<Player>
 
     @GET("v2/csgo/standard/profile/steam/{steamId}?")
-    fun getEmployeeListRequireToken(@Header("TRN-Api-Key=4da12bea-87ca-49c5-b037-1b1abdc9fda7") key: String): Call<List<Player>>
+    fun getStatsAPIKey(@Header("TRN-Api-Key=4da12bea-87ca-49c5-b037-1b1abdc9fda7") key: String): Call<List<Player>>
 
 }
