@@ -3,9 +3,10 @@ package com.example.finalproject.models
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
+
 // 05 This creates our class, and defines our constructor, all in one line
 
-data class Player(
+data class PlayerData(
 
     @SerializedName("player_name")
     @Expose
@@ -28,3 +29,4 @@ data class Player(
     val playerWins: Int
 
     )
+

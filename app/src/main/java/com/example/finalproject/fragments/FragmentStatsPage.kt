@@ -7,15 +7,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.finalproject.R
 import com.example.finalproject.adapters.PlayerRecyclerViewAdapter
-import com.example.finalproject.models.Player
+import com.example.finalproject.models.PlayerData
 import com.example.finalproject.network.Endpoints
 import com.example.finalproject.network.RetroFitInstance
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.fragment_stats_page.*
+import kotlinx.android.synthetic.main.fragment_welcome_page.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -52,7 +52,7 @@ class FragmentStatsPage : Fragment() {
             // 08 pass bundle to the Fragment, through Navigation
             // 06
         }
-        recyclerView.apply {
+        userStats.apply {
             this.adapter = adapter
             // 06 A Fragment's Context is nullable.  This checks if it is or not.
             context?.let {
@@ -66,11 +66,11 @@ class FragmentStatsPage : Fragment() {
         }
 
         // 06_2 Uncomment the next line during this step for testing the RecyclerView
-        // displayTestData(adapter)
+        displayTestData(adapter)
 
         // 07 Comment out displayTestData() above.
         // 07 Performs our network request and displays the data.
-        fetchDataFromServer(adapter)
+        //fetchDataFromServer(adapter)
     }
 
     /**
@@ -80,7 +80,7 @@ class FragmentStatsPage : Fragment() {
         // Gets our endpoints as defined in the Endpoints interface
         val apiCalls = RetroFitInstance.retrofit
         // Gets the specific call we want
-        val request = apiCalls.create(Endpoints::class.java).getPlayerList()
+        val request = apiCalls.create(Endpoints::class.java).getPlayerAPIKey(steamInput.editableText.toString())
         /* This line is where the actual request is triggered. It requires a Callback.
         A Callback is a way of telling the app what to do when it gets a response
         back from the API.
@@ -89,9 +89,9 @@ class FragmentStatsPage : Fragment() {
         inside the <> matches what is inside the <> in the declaration of the function
         in the Endpoints interface.
         */
-        request.enqueue(object : Callback<List<Player>> {
+        request.enqueue(object : Callback<List<PlayerData>> {
             // Tell the app what to do if the network call fails for any reason.
-            override fun onFailure(call: Call<List<Player>>, t: Throwable) {
+            override fun onFailure(call: Call<List<PlayerData>>, t: Throwable) {
                 // Logcat Warn
                 Log.w(javaClass.name, "getEmployeeList() failed. Error: ${t.message}")
                 // Show pop up if Fragment is still in view
@@ -101,7 +101,7 @@ class FragmentStatsPage : Fragment() {
             }
             // Tell the app what to do if the network call responds.  This does not mean that it
             // got your data yet.  A 404 from the API is a response.
-            override fun onResponse(call: Call<List<Player>>, response: Response<List<Player>>) {
+            override fun onResponse(call: Call<List<PlayerData>>, response: Response<List<PlayerData>>) {
                 // Get response code
                 when (response.code()) {
                     // 200 equals a successful GET request that will contain the data requested
@@ -134,9 +134,8 @@ class FragmentStatsPage : Fragment() {
      */
     private fun displayTestData(adapter: PlayerRecyclerViewAdapter) {
         val testData = listOf(
-            Player(1, "test1", 85000, 32, ""),
-            Player(2, "test2", 85000, 32, ""),
-            Player(3, "test3", 85000, 32, ""))
+            PlayerData("OneKoreanBoi", 3, 2, 1.5, 1)
+        )
         adapter.submitList(testData)
     }
 
@@ -144,7 +143,3 @@ class FragmentStatsPage : Fragment() {
 
     }
 
-
-
-
-}

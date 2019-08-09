@@ -32,7 +32,6 @@ class FragmentWelcomePage : Fragment() {
             findNavController().navigate(R.id.action_fragmentWelcomePage_to_fragmentTutorialPage)
         }
         buttonSubmit.setOnClickListener {
-            val userInput = steamInput.editableText.toString()
             findNavController().navigate(R.id.action_fragmentWelcomePage_to_fragmentStatsPage)
         }
     }

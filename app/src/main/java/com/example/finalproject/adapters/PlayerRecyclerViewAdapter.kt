@@ -25,7 +25,7 @@ class PlayerRecyclerViewAdapter(private val onClick: (Player) -> Unit) : ListAda
         return PlayerViewHolder(view, onClick)
     }
 
-    override fun onBindViewHolder(holder: EmployeeViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: PlayerViewHolder, position: Int) {
         /*
         06 Binds the data to the ViewHolder. The holder comes from the ViewHolder
         created in the onCreateViewHolder method. position comes from the index
@@ -38,7 +38,7 @@ class PlayerRecyclerViewAdapter(private val onClick: (Player) -> Unit) : ListAda
     }
 }
 
-class EmployeeViewHolder(itemView: View, private val onClick: (Player) -> Unit) : RecyclerView.ViewHolder(itemView) {
+class PlayerViewHolder(itemView: View, private val onClick: (Player) -> Unit) : RecyclerView.ViewHolder(itemView) {
     // 06 holds the data that is bound to this ViewHolder
     var player: Player? = null
         /*
@@ -55,7 +55,11 @@ class EmployeeViewHolder(itemView: View, private val onClick: (Player) -> Unit) 
                 field = it
                 // Finds the TextView from the XML inflated in our ViewHolder, and sets the text
                 // to the employeeName.
-                itemView.findViewById<TextView>(R.id.textViewVHEmployeeName).text = it.playerName
+                itemView.findViewById<TextView>(R.id.textViewVHPlayerName).text = it.playerName
+                itemView.findViewById<TextView>(R.id.textViewVHPlayerKills).text = it.playerKills.toString()
+                itemView.findViewById<TextView>(R.id.textViewVHPlayerDeaths).text = it.playerDeaths.toString()
+                itemView.findViewById<TextView>(R.id.textViewVHPlayerKD).text = it.playerKD.toString()
+                itemView.findViewById<TextView>(R.id.textViewVHPlayerWins).text = it.playerWins.toString()
                 /* This makes the entire ViewHolder clickable. It does this by using the lambda
                 we passed in when we instantiated our adapter.  The onClick takes an Employee as an
                 argument.

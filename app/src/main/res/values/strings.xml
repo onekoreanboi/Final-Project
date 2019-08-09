@@ -19,4 +19,9 @@
     <string name="playerDeaths">Deaths</string>
     <string name="playerKD">K/D</string>
     <string name="playerWins">Wins</string>
+    <string name="name">Name</string>
+    <string name="kills">Kills:</string>
+    <string name="deaths">Deaths:</string>
+    <string name="kd">K/D:</string>
+    <string name="wins">Wins:</string>
 </resources>
