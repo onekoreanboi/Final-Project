@@ -32,9 +32,12 @@ class FragmentWelcomePage : Fragment() {
             findNavController().navigate(R.id.action_fragmentWelcomePage_to_fragmentTutorialPage)
         }
         buttonSubmit.setOnClickListener {
-            findNavController().navigate(R.id.action_fragmentWelcomePage_to_fragmentStatsPage)
-        }
+            val bundle = Bundle()
+            bundle.putString("steamInput", steamInput.text.toString())
+            findNavController().navigate(R.id.action_fragmentWelcomePage_to_fragmentStatsPage, bundle)
+
     }
+}
 
 
 }

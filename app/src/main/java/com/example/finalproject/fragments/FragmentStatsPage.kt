@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.finalproject.R
 import com.example.finalproject.adapters.PlayerRecyclerViewAdapter
-import com.example.finalproject.models.PlayerData
+import com.example.finalproject.models.NewPlayerData
 import com.example.finalproject.network.Endpoints
 import com.example.finalproject.network.RetroFitInstance
 import com.google.android.material.snackbar.Snackbar
@@ -44,15 +44,11 @@ class FragmentStatsPage : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val adapter = PlayerRecyclerViewAdapter { player ->
             // 08 Create the Bundle to pass the information to the next Fragment
-            val bundle = Bundle()
-            bundle.putInt(getString(R.string.playerKills), player.playerKills)
-            bundle.putInt(getString(R.string.playerDeaths), player.playerDeaths)
-            bundle.putDouble(getString(R.string.playerKD), player.playerKD)
-            bundle.putInt(getString(R.string.playerWins), player.playerWins)
+
             // 08 pass bundle to the Fragment, through Navigation
             // 06
         }
-        userStats.apply {
+        /*userStats.apply {
             this.adapter = adapter
             // 06 A Fragment's Context is nullable.  This checks if it is or not.
             context?.let {
@@ -64,7 +60,7 @@ class FragmentStatsPage : Fragment() {
                 this.layoutManager = LinearLayoutManager(it)
             }
         }
-
+        */
         // 06_2 Uncomment the next line during this step for testing the RecyclerView
         //displayTestData(adapter)
 
@@ -80,7 +76,11 @@ class FragmentStatsPage : Fragment() {
         // Gets our endpoints as defined in the Endpoints interface
         val apiCalls = RetroFitInstance.retrofit
         // Gets the specific call we want
-        val request = apiCalls.create(Endpoints::class.java).getPlayerAPIKey(steamInput.editableText.toString())
+        var request: Call<NewPlayerData>? = null
+        val args = arguments
+        args?.let {
+            request = apiCalls.create(Endpoints::class.java).getPlayerAPIKey(it.getString("steamInput")!!)
+        }
         /* This line is where the actual request is triggered. It requires a Callback.
         A Callback is a way of telling the app what to do when it gets a response
         back from the API.
@@ -89,9 +89,9 @@ class FragmentStatsPage : Fragment() {
         inside the <> matches what is inside the <> in the declaration of the function
         in the Endpoints interface.
         */
-        request.enqueue(object : Callback<List<PlayerData>> {
+        request!!.enqueue(object : Callback<NewPlayerData> {
             // Tell the app what to do if the network call fails for any reason.
-            override fun onFailure(call: Call<List<PlayerData>>, t: Throwable) {
+            override fun onFailure(call: Call<NewPlayerData>, t: Throwable) {
                 // Logcat Warn
                 Log.w(javaClass.name, "getEmployeeList() failed. Error: ${t.message}")
                 // Show pop up if Fragment is still in view
@@ -99,9 +99,10 @@ class FragmentStatsPage : Fragment() {
                     Snackbar.make(it, "Network request failed.", Snackbar.LENGTH_LONG).show()
                 }
             }
+
             // Tell the app what to do if the network call responds.  This does not mean that it
             // got your data yet.  A 404 from the API is a response.
-            override fun onResponse(call: Call<List<PlayerData>>, response: Response<List<PlayerData>>) {
+            override fun onResponse(call: Call<NewPlayerData>, response: Response<NewPlayerData>) {
                 // Get response code
                 when (response.code()) {
                     // 200 equals a successful GET request that will contain the data requested
@@ -111,35 +112,35 @@ class FragmentStatsPage : Fragment() {
                         response.body()?.let {
                             // if not null, send the data to the ListAdapter so that it can be
                             // shown in the RecyclerView
-                            adapter.submitList(it)
+                            textView5.text = it.data.segments[0].stats.kills.displayValue
+                            textView7.text = it.data.segments[0].stats.deaths.displayValue
+                            textView8.text = it.data.segments[0].stats.kd.displayValue
+                            textView9.text = it.data.segments[0].stats.wins.displayValue
                         }
-                    }
-                    // If response code is anything but 200, show an error and the error code
-                    else -> {
-                        constraintLayout?.let {
-                            Snackbar.make(it, "Something went wrong. CODE: ${response.code()}", Snackbar.LENGTH_LONG).show()
-                        }
+                        // If response code is anything but 200, show an error and the error code
+
                     }
                 }
             }
         })
-    }
 
-    /** 06_2 This creates a set of test data and submits it to our adapter, to be displayed
-     * in the RecyclerView.
-     *
-     * NOTE: This function is only for testing our RecyclerView. We can remove this code
-     * immediately after testing is successful. It will be replaced with our actual data
-     * source in a future step.
-     */
-    private fun displayTestData(adapter: PlayerRecyclerViewAdapter) {
+
+        /** 06_2 This creates a set of test data and submits it to our adapter, to be displayed
+         * in the RecyclerView.
+         *
+         * NOTE: This function is only for testing our RecyclerView. We can remove this code
+         * immediately after testing is successful. It will be replaced with our actual data
+         * source in a future step.
+         */
+        /*private fun displayTestData(adapter: PlayerRecyclerViewAdapter) {
         val testData = listOf(
-            PlayerData("OneKoreanBoi", 3, 2, 1.5, 1)
+            NewPlayerData("OneKoreanBoi", 3, 2, 1.5, 1)
         )
         adapter.submitList(testData)
     }
-
+    */
 
 
     }
+}
 

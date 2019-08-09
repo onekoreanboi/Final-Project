@@ -1,0 +1,31 @@
+package com.example.finalproject.models
+
+data class Stats(
+    val bombsDefused: BombsDefused,
+    val bombsPlanted: BombsPlanted,
+    val damage: Damage,
+    val deaths: Deaths,
+    val dominationOverkills: DominationOverkills,
+    val dominationRevenges: DominationRevenges,
+    val dominations: Dominations,
+    val headshotPct: HeadshotPct,
+    val headshots: Headshots,
+    val hostagesRescued: HostagesRescued,
+    val kd: Kd,
+    val kills: Kills,
+    val losses: Losses,
+    val matchesPlayed: MatchesPlayed,
+    val moneyEarned: MoneyEarned,
+    val mvp: Mvp,
+    val roundsPlayed: RoundsPlayed,
+    val roundsWon: RoundsWon,
+    val score: Score,
+    val shotsAccuracy: ShotsAccuracy,
+    val shotsFired: ShotsFired,
+    val shotsHit: ShotsHit,
+    val snipersKilled: SnipersKilled,
+    val ties: Ties,
+    val timePlayed: TimePlayed,
+    val wins: Wins,
+    val wlPercentage: WlPercentage
+)

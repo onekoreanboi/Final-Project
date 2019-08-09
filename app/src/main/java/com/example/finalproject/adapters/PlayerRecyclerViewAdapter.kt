@@ -8,9 +8,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.finalproject.R
-import com.example.finalproject.models.PlayerData
+import com.example.finalproject.models.NewPlayerData
 
-class PlayerRecyclerViewAdapter(private val onClick: (PlayerData) -> Unit) : ListAdapter<PlayerData, PlayerViewHolder>(PlayerDiffCallback()) {
+class PlayerRecyclerViewAdapter(private val onClick: (NewPlayerData) -> Unit) : ListAdapter<NewPlayerData, PlayerViewHolder>(PlayerDiffCallback()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlayerViewHolder {
         /*
         06 Creates the View and links the XML layout file to the Kotlin, similar to how Fragments
@@ -38,9 +38,9 @@ class PlayerRecyclerViewAdapter(private val onClick: (PlayerData) -> Unit) : Lis
     }
 }
 
-class PlayerViewHolder(itemView: View, private val onClick: (PlayerData) -> Unit) : RecyclerView.ViewHolder(itemView) {
+class PlayerViewHolder(itemView: View, private val onClick: (NewPlayerData) -> Unit) : RecyclerView.ViewHolder(itemView) {
     // 06 holds the data that is bound to this ViewHolder
-    var player: PlayerData? = null
+    var player: NewPlayerData? = null
         /*
         06 Custom setter is used to ensure that if a null value is somehow, bound
         to a ViewHolder, it is not displayed, preventing a NullPointerException,
@@ -55,11 +55,7 @@ class PlayerViewHolder(itemView: View, private val onClick: (PlayerData) -> Unit
                 field = it
                 // Finds the TextView from the XML inflated in our ViewHolder, and sets the text
                 // to the employeeName.
-                itemView.findViewById<TextView>(R.id.textViewVHPlayerName).text = it.playerName
-                itemView.findViewById<TextView>(R.id.textViewVHPlayerKills).text = it.playerKills.toString()
-                itemView.findViewById<TextView>(R.id.textViewVHPlayerDeaths).text = it.playerDeaths.toString()
-                itemView.findViewById<TextView>(R.id.textViewVHPlayerKD).text = it.playerKD.toString()
-                itemView.findViewById<TextView>(R.id.textViewVHPlayerWins).text = it.playerWins.toString()
+
                 /* This makes the entire ViewHolder clickable. It does this by using the lambda
                 we passed in when we instantiated our adapter.  The onClick takes an Employee as an
                 argument.
@@ -79,17 +75,17 @@ class PlayerViewHolder(itemView: View, private val onClick: (PlayerData) -> Unit
  * other, and animates changes in the RecyclerView, instead of things
  * just abruptly resetting and jumping around the screen.
  */
-class PlayerDiffCallback : DiffUtil.ItemCallback<PlayerData>() {
-    override fun areItemsTheSame(oldItem: PlayerData, newItem: PlayerData): Boolean {
+class PlayerDiffCallback : DiffUtil.ItemCallback<NewPlayerData>() {
+    override fun areItemsTheSame(oldItem: NewPlayerData, newItem: NewPlayerData): Boolean {
         // 06 Items are the same if they are saved in the same location in memory.
         return oldItem === newItem
     }
 
-    override fun areContentsTheSame(oldItem: PlayerData, newItem: PlayerData): Boolean {
+    override fun areContentsTheSame(oldItem: NewPlayerData, newItem: NewPlayerData): Boolean {
         /*
         06 Because we used a 'data' class for our Employee Object, we get an implementation
         of the equals function for us, that compares the content of two Objects.
-         */
-        return oldItem == newItem
-    }
+*/
+return oldItem == newItem
+}
 }
