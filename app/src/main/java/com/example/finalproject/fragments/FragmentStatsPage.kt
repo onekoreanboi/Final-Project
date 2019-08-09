@@ -66,11 +66,11 @@ class FragmentStatsPage : Fragment() {
         }
 
         // 06_2 Uncomment the next line during this step for testing the RecyclerView
-        displayTestData(adapter)
+        //displayTestData(adapter)
 
         // 07 Comment out displayTestData() above.
         // 07 Performs our network request and displays the data.
-        //fetchDataFromServer(adapter)
+        fetchDataFromServer(adapter)
     }
 
     /**

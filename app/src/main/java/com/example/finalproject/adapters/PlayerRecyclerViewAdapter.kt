@@ -8,9 +8,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.finalproject.R
-import com.example.finalproject.models.Player
+import com.example.finalproject.models.PlayerData
 
-class PlayerRecyclerViewAdapter(private val onClick: (Player) -> Unit) : ListAdapter<Player, PlayerViewHolder>(PlayerDiffCallback()) {
+class PlayerRecyclerViewAdapter(private val onClick: (PlayerData) -> Unit) : ListAdapter<PlayerData, PlayerViewHolder>(PlayerDiffCallback()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlayerViewHolder {
         /*
         06 Creates the View and links the XML layout file to the Kotlin, similar to how Fragments
@@ -38,9 +38,9 @@ class PlayerRecyclerViewAdapter(private val onClick: (Player) -> Unit) : ListAda
     }
 }
 
-class PlayerViewHolder(itemView: View, private val onClick: (Player) -> Unit) : RecyclerView.ViewHolder(itemView) {
+class PlayerViewHolder(itemView: View, private val onClick: (PlayerData) -> Unit) : RecyclerView.ViewHolder(itemView) {
     // 06 holds the data that is bound to this ViewHolder
-    var player: Player? = null
+    var player: PlayerData? = null
         /*
         06 Custom setter is used to ensure that if a null value is somehow, bound
         to a ViewHolder, it is not displayed, preventing a NullPointerException,
@@ -79,13 +79,13 @@ class PlayerViewHolder(itemView: View, private val onClick: (Player) -> Unit) : 
  * other, and animates changes in the RecyclerView, instead of things
  * just abruptly resetting and jumping around the screen.
  */
-class PlayerDiffCallback : DiffUtil.ItemCallback<Player>() {
-    override fun areItemsTheSame(oldItem: Player, newItem: Player): Boolean {
+class PlayerDiffCallback : DiffUtil.ItemCallback<PlayerData>() {
+    override fun areItemsTheSame(oldItem: PlayerData, newItem: PlayerData): Boolean {
         // 06 Items are the same if they are saved in the same location in memory.
         return oldItem === newItem
     }
 
-    override fun areContentsTheSame(oldItem: Player, newItem: Player): Boolean {
+    override fun areContentsTheSame(oldItem: PlayerData, newItem: PlayerData): Boolean {
         /*
         06 Because we used a 'data' class for our Employee Object, we get an implementation
         of the equals function for us, that compares the content of two Objects.
